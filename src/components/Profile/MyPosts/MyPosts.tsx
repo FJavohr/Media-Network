@@ -12,6 +12,7 @@ type MyPostsType = {
     posts: Array<PostsType>;
     addPost: (post: string) => void;
     newPostText: string
+    updateNewPostText: (newText: string) => void
 };
 
 export const MyPosts = (props: MyPostsType) => {
@@ -21,14 +22,14 @@ export const MyPosts = (props: MyPostsType) => {
         if (myRef.current) {
             let text = myRef.current.value;
             props.addPost(text);
-            myRef.current.value = ""
+            props.updateNewPostText("")
         }
     };
 
     let onPostChange = () => {
         if (myRef.current) {
         let text = myRef.current.value;
-            console.log(text)
+            props.updateNewPostText(text)
         }
     }
 

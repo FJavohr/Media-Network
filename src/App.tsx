@@ -8,18 +8,22 @@ import {Routes} from 'react-router'
 import './App.css';
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {StateType} from "./redux/state";
+import {RootStateType} from "./redux/state";
 
 
-const App = (props: StateType) => {
+const App = (props: { store: RootStateType }) => {
     return (
         <div className='app-wrapper'>
             <Header/>
             <Navbar/>
             <div className="app-wrapper-content">
                 <Routes>
-                    <Route index path="/dialogs" element={<Dialogs dialogs={props.state.messagesPage.dialogs} messages={props.state.messagesPage.messages} />}/>
-                    <Route path="/profile" element={<Profile newPostText={props.state.values.newPostText} posts={props.state.profilePage.posts} addPost={props.state.callbacks.addPost} />}/>
+                    <Route index path="/dialogs" element={<Dialogs dialogs={props.store.messagesPage.dialogs}
+                                                                   messages={props.store.messagesPage.messages}/>}/>
+                    <Route path="/profile" element={<Profile updateNewPostText={props.store.callbacks.updateNewPostText}
+                                                             newPostText={props.store.values.newPostText}
+                                                             posts={props.store.profilePage.posts}
+                                                             addPost={props.store.callbacks.addPost}/>}/>
                     <Route path="/settings" element={<Settings/>}/>
                     <Route path="/news" element={<News/>}/>
                 </Routes>
